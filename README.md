@@ -9,7 +9,6 @@ A production-grade, fully responsive React/Next.js wall calendar component with 
 ## 🎬 Demo
 
 - **Live Demo:** [View on Netlify](https://luma-calendar.netlify.app/)
-- **Video Walkthrough:** [Watch on Drive](https://drive.google.com/file/d/1u2V5KkWLqt7RmbZtAVw2pOyrDKTnPpTN/view?usp=sharing)
 
 ## ✨ Features
 
