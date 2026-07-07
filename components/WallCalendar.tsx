@@ -12,6 +12,7 @@ import {
   Keyboard, Download, Trash2, Pencil, Save,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import VoiceNoteRecorder from "./VoiceNoteRecorder";
 
 const DAYS_OF_WEEK = ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"];
 
@@ -583,10 +584,10 @@ export default function WallCalendar() {
     return () => window.removeEventListener("keydown", onKey);
   }, [handleNextMonth, handlePrevMonth, applyPreset]);
 
-  function showToast(message: string) {
+  const showToast = useCallback((message: string) => {
     setToast({ visible: true, message });
     setTimeout(() => setToast({ visible: false, message: "" }), 2400);
-  }
+  }, []);
 
   function saveNote() {
     const trimmed = noteText.trim();
@@ -602,6 +603,26 @@ export default function WallCalendar() {
       },
     ]);
     setNoteText("");
+  }
+
+  function saveVoiceNote({ date, text, tag }: { date: string; text: string; tag: NoteTag }) {
+    const parsedDate = new Date(`${date}T00:00:00`);
+    if (!text.trim() || Number.isNaN(parsedDate.getTime())) return;
+
+    setCurrentMonth(parsedDate);
+    setRangeStart(parsedDate);
+    setRangeEnd(parsedDate);
+    setHoverDate(null);
+    setNotes((prev) => [
+      ...prev,
+      {
+        id:    uid(),
+        start: date,
+        end:   date,
+        text:  text.trim(),
+        tag,
+      },
+    ]);
   }
 
   function deleteNote(id: string) {
@@ -863,20 +884,31 @@ export default function WallCalendar() {
                     : `${format(rangeStart, "MMM d")}  —  ${format(rangeEnd, "MMM d, yyyy")}`}
                 </p>
 
-                <textarea
-                  value={noteText}
-                  onChange={(e) => setNoteText(e.target.value)}
-                  disabled={!rangeStart}
-                  placeholder={rangeStart ? "Document events, plans, reminders…" : "Select dates to unlock notes…"}
-                  aria-label="New note text"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) saveNote();
-                  }}
-                  className={`w-full p-3 md:p-4 text-sm rounded-xl border outline-none bg-transparent transition-all focus:shadow-md resize-y min-h-[80px] md:min-h-[90px] ${
-                    dark ? "border-zinc-700 text-zinc-200" : "border-zinc-300 text-zinc-900 focus:border-zinc-400"
-                  } ${!rangeStart ? "opacity-40" : ""}`}
-                  style={{ outlineColor: accent }}
-                />
+                <div className="relative">
+                  <textarea
+                    value={noteText}
+                    onChange={(e) => setNoteText(e.target.value)}
+                    disabled={!rangeStart}
+                    placeholder={rangeStart ? "Document events, plans, reminders…" : "Select dates to unlock notes…"}
+                    aria-label="New note text"
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && (e.ctrlKey || e.metaKey)) saveNote();
+                    }}
+                    className={`w-full p-3 md:p-4 pr-16 text-sm rounded-xl border outline-none bg-transparent transition-all focus:shadow-md resize-y min-h-[80px] md:min-h-[90px] ${
+                      dark ? "border-zinc-700 text-zinc-200" : "border-zinc-300 text-zinc-900 focus:border-zinc-400"
+                    } ${!rangeStart ? "opacity-40" : ""}`}
+                    style={{ outlineColor: accent }}
+                  />
+
+                  <VoiceNoteRecorder
+                    accent={accent}
+                    dark={dark}
+                    defaultDate={rangeStart ? format(rangeStart, "yyyy-MM-dd") : ""}
+                    selectedTag={selectedTag}
+                    onCreateNote={saveVoiceNote}
+                    onToast={showToast}
+                  />
+                </div>
 
                 <div className={`flex flex-col sm:flex-row sm:items-center justify-between gap-3 transition-opacity ${!rangeStart ? "opacity-40 pointer-events-none" : ""}`}>
                   <div className="flex gap-2 flex-wrap" role="group" aria-label="Note category">
