@@ -1,5 +1,5 @@
-import WallCalendar from "../components/WallCalendar";
+import PortfolioApp from "@/components/portfolio/PortfolioApp";
 
 export default function Home() {
-  return <WallCalendar />;
+  return <PortfolioApp />;
 }

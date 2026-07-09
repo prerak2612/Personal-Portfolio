@@ -1,120 +1,66 @@
-# 🗓️ Interactive Wall Calendar Component
+# Prerak Arya - 3D Developer Portfolio
 
-A production-grade, fully responsive React/Next.js wall calendar component with date range selection, tagged notes, voice note creation, and beautiful animations.
+Premium interactive portfolio built from the attached resume content. The site uses a futuristic black visual system, a terminal-style intro animation, a CSS 3D-inspired command-center hero, smooth scrolling, scroll-triggered motion, glass panels, magnetic buttons, and an easy-to-update data file.
 
-![Next.js](https://img.shields.io/badge/Next.js-16-black?logo=next.js)
-![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?logo=typescript)
-![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?logo=tailwind-css)
+## Tech Stack
 
-## 🎬 Demo
+- Next.js App Router
+- React
+- TypeScript
+- TailwindCSS
+- Three.js with React Three Fiber and Drei
+- Framer Motion
+- GSAP ScrollTrigger
+- Lenis
+- Shadcn-style UI primitives
 
-- **Live Demo:** [View on Netlify](https://luma-calendar.netlify.app/)
-
-## ✨ Features
-
-### Core Requirements ✅
-- ✅ **Wall Calendar Aesthetic** - Physical calendar look with spiral binding & hero images
-- ✅ **Day Range Selector** - Click to select start & end dates with visual states
-- ✅ **Integrated Notes** - Tagged notes (Work/Personal/Urgent) with CRUD operations
-- ✅ **Voice Note Creation** - Speak natural-language agenda items and convert them into editable notes
-- ✅ **Responsive Design** - Desktop grid → Mobile stack layout
-- ✅ **Data Persistence** - localStorage for notes & theme preferences
-
-### Creative Extras 🚀
-- 🎤 **Voice Assistant** - Floating mic button with Web Speech API transcription
-- 🎙️ **Natural Language Parsing** - Extracts title, date, and time from phrases like "Meeting tomorrow at 5 PM"
-- ✨ **Premium Recording UI** - Frosted glass popup, glowing mic, pulsing rings, animated waveform, and success/error states
-- 🎨 **Dynamic Themes** - Each month has unique seasonal imagery & accent colors
-- ⌨️ **Keyboard Shortcuts** - Arrow keys, T for today, D for dark mode, Esc to clear
-- 🌙 **Dark/Light Mode** - Toggle with preference persistence
-- 📊 **Tag Analytics** - Monthly breakdown of notes by category
-- 📋 **Quick Presets** - One-click "Today", "This Week", "This Month" selection
-- 🎉 **Holiday Markers** - Public holidays via Nager API + static fallback
-- ✏️ **Edit Notes** - Inline editing for saved notes
-- 📤 **Export Notes** - Download notes as plain text agenda
-- 📅 **Quick Month Navigator** - Jump to any month instantly
-- 🔔 **Toast Notifications** - Feedback for all user actions
-- ♿ **Full Accessibility** - ARIA labels, keyboard navigation
-- 🎭 **Page Flip Animation** - Smooth month transitions
-
-## 🛠️ Tech Stack
-
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS v4
-- **Animations:** Framer Motion
-- **Icons:** Lucide React
-- **Date Utils:** date-fns
-- **Holidays:** Nager public holiday API (+ fallback map)
-- **Voice Input:** Browser Web Speech API
-
-## 🚀 Quick Start
+## Getting Started
 
 ```bash
-# Clone the repository
-git clone https://github.com/YOUR_USERNAME/wall-calendar.git
-cd wall-calendar
-
-# Install dependencies
 npm install
-
-# Start development server
 npm run dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) in your browser.
+Open [http://localhost:3000](http://localhost:3000).
 
-## 🎤 Voice Notes
+## Content Source
 
-Click the floating microphone button inside the Agenda note box and speak a reminder such as:
+All portfolio content lives in:
 
-- "Meeting tomorrow at 5 PM"
-- "Doctor appointment next Friday"
-- "Birthday on 20 July"
-- "Interview Monday at 10 AM"
-
-The recorder shows a live transcript, then extracts an editable title, date, and time. If the browser cannot determine a date or time, the field stays editable so you can complete it manually before adding the note.
-
-Voice input uses the browser SpeechRecognition API. Unsupported browsers and microphone permission errors are handled gracefully with an in-app message.
-
-## ⌨️ Keyboard Shortcuts
-
-| Key | Action |
-|-----|--------|
-| ← / → | Navigate months |
-| T | Jump to today |
-| D | Toggle dark mode |
-| Esc | Clear selection |
-
-## 📁 Project Structure
-
-```
-├── app/
-│   ├── globals.css      # Global styles
-│   ├── layout.tsx       # Root layout with fonts
-│   └── page.tsx         # Home page
-├── components/
-│   ├── VoiceNoteRecorder.tsx   # Voice note recording UI
-│   ├── WallCalendar.tsx        # Main calendar component
-│   ├── useSpeechRecognition.ts # Web Speech API hook
-│   └── voiceNoteParser.ts      # Natural-language note parser
-├── package.json
-└── README.md
+```text
+data/portfolio-data.ts
 ```
 
-## 🎨 Design Decisions
+Update that file to change the name, summary, experience, projects, education, skills, achievements, and contact links.
 
-1. **Single Component Architecture** - Easy evaluation with clean internal separation
-2. **Hybrid Holiday Source** - API first with graceful static fallback
-3. **localStorage Persistence** - Notes and color mode survive refresh/restart
-4. **Mobile-First Design** - Touch-optimized, then enhanced for desktop
-5. **Accessibility Priority** - Full ARIA support & keyboard navigation
-6. **Graceful Voice Enhancement** - Speech recognition upgrades note creation when supported without blocking manual entry
+## Project Structure
 
-## 📱 Testing Responsive Design
+```text
+app/
+  globals.css
+  layout.tsx
+  page.tsx
+components/
+  portfolio/
+    CommandCenterScene.tsx
+    CustomCursor.tsx
+    LoadingScreen.tsx
+    MagneticButton.tsx
+    PortfolioApp.tsx
+    SmoothScroll.tsx
+  ui/
+    button.tsx
+data/
+  portfolio-data.ts
+lib/
+  utils.ts
+```
 
-1. Open browser DevTools (F12)
-2. Toggle device toolbar (Ctrl+Shift+M)
-3. Test various screen sizes
+## Production Notes
 
----
+- The 3D scene is client-only and dynamically loaded to keep the app shell fast.
+- Motion respects `prefers-reduced-motion`.
+- Project cards use verified resume links for GitHub and live demos.
+- Resume-missing data is represented with TODO placeholders rather than invented details.
+- The resume download button serves `public/resume-prerak-arya.pdf`.
+- The About portrait uses `public/profile-prerak-arya.png`.

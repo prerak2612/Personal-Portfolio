@@ -1,21 +1,27 @@
 {
-  "name": "wall-calendar",
+  "name": "prerak-arya-portfolio",
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev --webpack",
     "build": "next build",
     "start": "next start"
   },
   "dependencies": {
+    "@radix-ui/react-slot": "^1.3.0",
+    "@react-three/drei": "^9.122.0",
+    "@react-three/fiber": "^8.17.10",
     "@tailwindcss/postcss": "^4.2.2",
-    "date-fns": "^4.1.0",
-    "date-holidays": "^3.26.12",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
     "framer-motion": "^12.38.0",
-    "lucide-react": "^1.7.0",
+    "gsap": "^3.15.0",
+    "lenis": "^1.3.25",
     "next": "^16.2.2",
     "react": "^18.3.0",
-    "react-dom": "^18.3.0"
+    "react-dom": "^18.3.0",
+    "tailwind-merge": "^3.6.0",
+    "three": "^0.171.0"
   },
   "devDependencies": {
     "@types/node": "^25.5.2",
