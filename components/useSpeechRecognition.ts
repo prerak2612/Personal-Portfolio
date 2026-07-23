@@ -223,16 +223,15 @@ export function useSpeechRecognition({ pauseMs = 2600 } = {}) {
     recognitionRef.current = recognition;
     listeningRef.current = true;
 
-    try {
-      recognition.start();
-      return true;
-    } catch {
-      listeningRef.current = false;
-      setError("Speech recognition could not be started.");
-      setStatus("error");
-      return false;
-    }
-  }, [clearSilenceTimer, scheduleAutoStop]);
+try {
+  recognition.start();
+  return true;
+} catch (error) {
+  listeningRef.current = false;
+  setError("Speech recognition could not be started.");
+  setStatus("error");
+  return false;
+}
 
   return {
     error,
